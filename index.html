@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minesweeper Game</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Cells.js"></script>
+    <script src="js/buildBoard.js"></script>
+    <script src="js/setGameOptions.js"></script>
+    <script src="js/minesweeper.js"></script>
+
+</head>
+<body>
+<!-- Modal ChangeRowColModal -->
+<div class="modal fade" id="changeRowColModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <h4 class="modal-title" id="myModalLabel">Please change the number of rows and columns</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group div_inputRow">
+                    <label class="control-label" for="inputRow">Please input a number of Row (range from 8 to 40):&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                    <input type="text" class="form-control" name="inputRow" id="inputRow">
+                </div>
+                <div class="form-group div_inputRow">
+                    <label class="control-label" for="inputCol">Please input a number of Column (range from 8 to 30):</label>
+                    <input type="text" class="form-control" name="inputCol" id="inputCol">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="alertMsg"></div>
+                <span class="glyphicon glyphicon-remove btn btn-default" data-dismiss="modal" >
+                    Close
+                </span>
+                <span class="glyphicon glyphicon-ok btn btn btn-primary" data-dismiss="modal" id="changeRowCol">
+                    Apply
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal ChangeBomb -->
+<div class="modal fade" id="changeBombModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <h4 class="modal-title" id="myModalLabel2">Please change the number of Bombs</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group div_inputRow">
+                    <label class="control-label" for="inputRow">Please input a number of bomb (range from 1 to size of board - 1)</label>
+                    <input type="text" class="form-control" name="inputBomb" id="inputBomb">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="alertMsgBomb"></div>
+                <span class="glyphicon glyphicon-remove btn btn-default" data-dismiss="modal" >
+                    Close
+                </span>
+                <span class="glyphicon glyphicon-ok btn btn btn-primary" data-dismiss="modal" id="changeBomb">
+                    Apply
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- NAV -->
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="#">CHONGRUI ZHANG</a>
+   </div>
+   <div>
+   <ul class="nav navbar-nav">
+      <li id="game_dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Game Setting
+            <b class="caret"></b>
+         </a>
+         <ul class="dropdown-menu">
+            <li class="restart"><a href="#">New</a></li>
+            <!--<li><a href="#">Pause</a></li>-->
+            <li class="divider"></li>
+            <li data-toggle="modal" data-target="#changeRowColModal"><a href="#">Rows & Columns</a></li>
+            <li class="divider"></li>
+            <li data-toggle="modal" data-target="#changeBombModal"><a href="#">Number of Mines</a></li>
+            <li class="divider"></li>
+            <li id="personalBest"><a href="#">Personal Best</a></li>
+         </ul>
+      </li>
+      <li id="options_dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options
+            <b class="caret"></b>
+         </a>
+         <ul class="dropdown-menu">
+            <li id="displayAllBombs"><a href="#">Display Bombs</a></li>
+         </ul>
+      </li>
+      <li id="help_dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help
+            <b class="caret"></b>
+         </a>
+         <ul class="dropdown-menu">
+            <li><a href="#">INSTRUCTIONS</a></li>
+            <li class="divider"></li>
+            <li><a href="#">TECHNICAL NOTES</a></li>
+            <li class="divider"></li>
+            <li><a href="#">ABOUT</a></li>
+         </ul>
+      </li>
+   </ul>
+   <ul class="nav navbar-nav navbar-left">
+
+       <span class="btn btn btn-primary restart" data-dismiss="modal" id="restart-btn">
+                Restart
+       </span>
+
+   </ul>
+   </div>
+
+</div>
+</nav>
+<!-- Container/Board -->
+<div id="board_container" class="panel panel-default" >
+  <!-- Default panel contents -->
+  <div class="panel panel-default">
+   <div class="panel-heading">A MINESWEEPER GAME</div>
+      <div class="panel-body">
+         <div class="panel-information">
+           <div id="minefieldSize"><span>Minefield Size:</span><span id="newFieldSize"><code>64</code></span></div>
+           <div id="numberOfMines"><span>Total Mine:</span><span id="newBombSize"><code>10</code></span></div>
+         </div>
+         <div class="clearfix"></div>
+         <div class="panel-prompt">
+           <div id="numOfBombLeft"><span>Bomb Left: &nbsp;&nbsp;&nbsp;</span><span id="bombLeft"><code>10</code></span></div>
+         <div id="timeArea"><span>Time:</span><span id="time"><code>0s</code></span></div>
+      </div>
+      </div>
+   <div class="panel-body">
+       <div id="divBoard" class="table-responsive">
+           <!-- Table -->
+
+      </div>
+   </div>
+   <div class="panel-body">
+       <div id="notice">Notice: <kbd>SHIFT+</kbd> <code>Right Click</code> is <b>NOT</b> supported!</div>
+   </div>
+  </div>
+</div>
+<script src="js/calculateLabel.js"></script>
+<script src="js/PersonalScores.js"></script>
+<script src="js/myEvent.js"></script>
+<script src="js/updateTime.js"></script>
+
+
+
+</body>
+</html>

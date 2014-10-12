@@ -1,0 +1,116 @@
+body {
+    margin: 10px;
+}
+
+.table {
+    width:400px;
+    padding:0;
+    margin:0;
+}
+
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    margin: 0;
+    padding:0;
+    vertical-align: middle;
+    text-align: center;
+
+}
+td, td.active {
+    width:36px;
+    height:30px;
+    margin:0;
+    padding:0;
+    border:0;
+    vertical-align: middle;
+}
+button{
+    width:36px;
+    height:36px;
+    margin:0;
+    padding:0;
+    /*border-width:2px;*/
+    /*border-style: outset;*/
+    vertical-align:top;
+}
+button span {
+    position:relative;
+    top:-5px;
+    left:-2.5px
+
+}
+.glyphicon, .glyphicon-flag{
+    vertical-align:middle
+}
+
+
+#imgBomb {
+    margin: 0;
+    display: block;
+    position: relative;
+    left: -3px;
+    top: -3px;
+}
+
+.table img#imgFlag {
+    margin: 0;
+    display: block;
+    position: relative;
+    left: -5px;
+}
+
+
+.button_example{
+    border:1px solid #df0909; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+    background-color: #f62b2b; background-image: -webkit-gradient(linear, left top, left bottom, from(#f62b2b), to(#d20202));
+    background-image: -webkit-linear-gradient(top, #f62b2b, #d20202);
+    background-image: -moz-linear-gradient(top, #f62b2b, #d20202);
+    background-image: -ms-linear-gradient(top, #f62b2b, #d20202);
+    background-image: -o-linear-gradient(top, #f62b2b, #d20202);
+    background-image: linear-gradient(to bottom, #f62b2b, #d20202);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f62b2b, endColorstr=#d20202);
+}
+
+.button_example:hover{
+    border:1px solid #b30808;
+    background-color: #e40a0a; background-image: -webkit-gradient(linear, left top, left bottom, from(#e40a0a), to(#9f0202));
+    background-image: -webkit-linear-gradient(top, #e40a0a, #9f0202);
+    background-image: -moz-linear-gradient(top, #e40a0a, #9f0202);
+    background-image: -ms-linear-gradient(top, #e40a0a, #9f0202);
+    background-image: -o-linear-gradient(top, #e40a0a, #9f0202);
+    background-image: linear-gradient(to bottom, #e40a0a, #9f0202);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#e40a0a, endColorstr=#9f0202);
+}
+
+#restart-btn {
+    margin-top:8px;
+}
+div.panel-body, .panel-information{
+    display:block;
+    clear:right;
+    padding: 0;
+    padding-left: 5px;
+}
+
+#minefieldSize,#numberOfMines{
+    float: left;
+    padding: 3px;
+    margin: 5px;
+    border-left: 2px solid black;
+}
+#numOfBombLeft,#timeArea {
+    float: left;
+    padding: 3px;
+    margin-left: 10px;
+    margin-right:8px;
+    margin-bottom:7px;;
+    border-left: 2px solid black;
+}
+#notice {
+    padding:5px;
+}
+.clearfix:after{
+    visibility:hidden
+    display: block
+    height: 0
+    clear: both
+}
+

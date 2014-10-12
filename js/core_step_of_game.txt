@@ -1,0 +1,70 @@
+/*
+Open step:
+focus on current single cell only => traverse using parent and children
+Bind with mousedown
+    if left click a normal btn:
+        if is marked, no reaction
+        else if is a bomb, Game Over!
+            else
+                if left click on a marked btn
+                    do not react!
+                if click on a btn adjacent to a bomb => label > 0 :
+                    set cleared; replace it with label
+                else [the button is not adjacent to any bombs => label = 0]
+                        set cleared; replace it with a blank btn
+                        call check_neighbors(this,neighbor) for 8 directions???
+                        // Though the cell is not bomb and not adjacent to bomb, neighbors can be marked or adj to bomb
+                        // put the part of check neighbors in Refresh step
+
+    else right click / shift click a normal btn:
+        if click on btn-normal, mark as flag; replace with btn-flag;
+        if click on btn-flag, un-mark it and replace with btn-normal;
+
+    after each click,
+    1. recursively check all connected neighbors from 8 directions: blank & label
+    push current btn(target) into stack
+      while(stack!=null){
+        current = stack.pop()
+        if current has 8 neighbors and that neighbor is not bomb, not cleared, not marked{
+          // may still either be blank or label
+          set the neighbor to be connected // refresh step will display every connected blank or button
+          push the neighbor into stack
+        }
+      }
+    2. decide if is_all_cleared --> result
+    if all cleared,
+        unbind mousedown, mouseup
+        alert "You Won"
+
+Refresh step:
+check all cells, use .each + parent/siblings would still be fine.
+Bind with mouseup => every click with do a click_down event and a refresh event
+    for each button that is connected:
+      if is blank button, display it and set it to be cleared
+      if is label button, display label and set it to be cleared
+
+    // put game over function in click step right after clicking on bomb
+    check if is gameover, GO!
+    // check if all cleared after each click => still in click step
+    check if is all cleared, You Won!
+
+*/
+
+
+
+
+/* Previous version of refresh step
+Refresh step:check all cells, use .each + parent/siblings would still be fine.
+    for each button that is_cleared == 1
+        call check_neighbors for 8 directions：
+         // check its neighbors: <=> using parent() and sibling() to traverse neighbors
+         if the neighbor is marked as flag,
+            no reaction
+         if neighbor is not marked and adjacent to a bomb (neighbor's label > 0),
+            display the label; replace with blank; set cleared
+         else if neighbor is not marked and not adjacent to bomb,
+            replace the neighbor with blank;
+            set cleared;
+            check if is all cleared
+            union(this,neighbor)？？？
+*/
